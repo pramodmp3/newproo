@@ -1,0 +1,254 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+}
+
+/* Hero-section - ORIGINAL CODE RESTORED */
+.hero {
+  width: 100%;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+}
+
+.hero-img {
+  display: flex;
+}
+
+.hero-img img {
+  width: 100vw;
+  height: 700px;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+/* Services Section Header - ORIGINAL CODE RESTORED */
+.serve-head {
+  text-align: center;
+  color: white;
+  margin-top: 50px;
+  padding: 35px;
+  background-color: black;
+  height: 100px;
+  box-shadow: 0 4px 8px aquamarine;
+}
+
+/* Grid container: 3 columns - ORIGINAL CODE RESTORED */
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+/* Grid item (box) - ORIGINAL CODE RESTORED */
+.container > div {
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 30px 20px;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.container > div:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* SVG icons - ORIGINAL CODE RESTORED */
+.container svg {
+  width: 60px;
+  height: 60px;
+  margin-bottom: 20px;
+}
+
+/* Link and heading - ORIGINAL CODE RESTORED */
+.container a {
+  text-decoration: none;
+  color: #333;
+}
+
+.container h3 {
+  font-size: 20px;
+  color: #333;
+  margin-top: 10px;
+}
+
+/* Awards and Clients Sections (CSS Marquee FIX) */
+
+.heading-aw {
+  text-align: center;
+  color: white;
+  margin: 30px 0;
+  padding: 35px;
+  background-color: black;
+  height: 100px;
+  box-shadow: 0 8px 8px aquamarine;
+}
+
+.marquee-container {
+  width: 100%;
+  overflow: hidden; /* FIX: Clips the scrolling content */
+  background-color: #fff;
+  padding: 20px 0;
+  border-top: 2px solid #ccc;
+  border-bottom: 2px solid #ccc;
+}
+
+/* The element that is being animated to scroll */
+.awards-content,
+.clients-content {
+  display: inline-flex;
+  animation: marquee-awards 30s linear infinite;
+}
+
+/* Separate speed for clients marquee */
+.clients-content {
+  animation: marquee-clients 15s linear infinite;
+}
+
+.awards {
+  display: flex;
+  gap: 40px;
+  align-items: center;
+  white-space: nowrap; /* FIX: Forces all images onto one line for scrolling */
+}
+
+.awards img {
+  width: 200px;
+  height: auto;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+  flex-shrink: 0;
+}
+
+.awards img:hover {
+  transform: scale(1.1);
+}
+
+/* Keyframe animation for continuous left scroll (Awards) */
+@keyframes marquee-awards {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%); /* Moves the duplicated content across */
+  }
+}
+
+/* Keyframe animation for continuous left scroll (Clients) */
+@keyframes marquee-clients {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+/* =======================
+   📱 MOBILE RESPONSIVENESS
+   ======================= */
+
+@media (max-width: 1024px) {
+  /* Hero-section - ORIGINAL CODE RESTORED */
+  .hero-img img {
+    height: 500px;
+  }
+  /* Container - ORIGINAL CODE RESTORED */
+  .container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 30px 15px;
+  }
+
+  .container > div {
+    min-height: 250px;
+    padding: 25px 15px;
+  }
+  /* Headers - ORIGINAL CODE RESTORED */
+  .serve-head,
+  .heading-aw {
+    font-size: 22px;
+    height: auto;
+    padding: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  /* Hero-section - ORIGINAL CODE RESTORED */
+  .hero-img img {
+    height: 400px;
+  }
+  /* Container - ORIGINAL CODE RESTORED */
+  .container {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .container > div {
+    width: 90%;
+    margin: 0 auto;
+    min-height: 220px;
+  }
+  /* Headers - ORIGINAL CODE RESTORED */
+  .serve-head,
+  .heading-aw {
+    font-size: 20px;
+    padding: 20px;
+  }
+  /* Awards/Clients Image size - ORIGINAL CODE RESTORED */
+  .awards img {
+    width: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  /* Hero-section - ORIGINAL CODE RESTORED */
+  .hero-img img {
+    height: 300px;
+  }
+  /* Headers - ORIGINAL CODE RESTORED */
+  .serve-head,
+  .heading-aw {
+    font-size: 18px;
+    padding: 15px;
+  }
+  /* Container - ORIGINAL CODE RESTORED */
+  .container {
+    padding: 20px 10px;
+  }
+
+  .container > div {
+    width: 100%;
+    padding: 20px 10px;
+  }
+
+  .container h3 {
+    font-size: 18px;
+  }
+  /* Awards/Clients Scrolling FIX */
+  .awards {
+    flex-wrap: nowrap;
+    gap: 20px;
+  }
+
+  .awards img {
+    width: 120px;
+  }
+}
