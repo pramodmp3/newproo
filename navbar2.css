@@ -1,6 +1,3 @@
-/* -------------------------------------- */
-/* 1. Global Reset and Base Styles */
-/* -------------------------------------- */
 * {
   margin: 0;
   padding: 0;
@@ -12,9 +9,6 @@ body {
   background-color: #fff;
 }
 
-/* -------------------------------------- */
-/* 2. Navbar Styling (Desktop & Shared) */
-/* -------------------------------------- */
 .navbar {
   position: sticky;
   top: 0;
@@ -39,11 +33,8 @@ body {
   cursor: pointer;
 }
 
-/* -------------------------------------- */
-/* 3. Hamburger Styling */
-/* -------------------------------------- */
 .hamburger {
-  display: none; /* Hidden on desktop */
+  display: none;
   flex-direction: column;
   justify-content: space-around;
   cursor: pointer;
@@ -60,7 +51,6 @@ body {
   transition: all 0.3s ease;
 }
 
-/* Active X animation */
 .hamburger.active span:nth-child(1) {
   transform: rotate(45deg) translateY(9px);
 }
@@ -71,18 +61,17 @@ body {
   transform: rotate(-45deg) translateY(-9px);
 }
 
-/* -------------------------------------- */
-/* 4. Navigation Links and Dropdowns (Desktop) */
-/* -------------------------------------- */
 .nav-links {
   list-style: none;
   display: flex;
   align-items: center;
   gap: 25px;
+  margin: 0 auto;
 }
 
 .nav-links li {
   position: relative;
+  align-items: center;
 }
 
 .nav-links a {
@@ -93,14 +82,13 @@ body {
   padding: 8px 10px;
   border-radius: 6px;
   transition: all 0.3s ease;
-  cursor: pointer;
+  white-space: nowrap;
 }
 
 .nav-links a:hover {
   background: rgba(255, 255, 255, 0.25);
 }
 
-/* Dropdown Menu (Desktop Hover) */
 .nav-links li ul.dropdown-menu {
   display: none;
   position: absolute;
@@ -110,17 +98,13 @@ body {
   backdrop-filter: blur(10px);
   border-radius: 8px;
   min-width: 150px;
-  flex-direction: column;
-  list-style: none;
   padding: 5px 0;
-  z-index: 100;
   box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
 }
 
 .nav-links li:hover > ul.dropdown-menu {
   display: flex;
   flex-direction: column;
-  list-style: none;
   animation: fadeIn 0.25s ease-in-out;
 }
 
@@ -128,16 +112,13 @@ body {
   color: #fff;
   display: block;
   padding: 10px 20px;
-  list-style: none;
   transition: background 0.3s;
 }
 
 .nav-links li ul.dropdown-menu a:hover {
   background: rgba(255, 255, 255, 0.2);
-  list-style: none;
 }
 
-/* Login Button */
 .login-btn button {
   padding: 8px 18px;
   background: linear-gradient(135deg, #6c5ce7, #00cec9);
@@ -166,12 +147,14 @@ body {
   }
 }
 
-/* -------------------------------------- */
-/* 5. Mobile Styles (Max-width: 768px) */
-/* -------------------------------------- */
+/* Mobile Styles */
 @media (max-width: 768px) {
   .hamburger {
     display: flex;
+  }
+
+  .login-btn {
+    display: none;
   }
 
   .nav-links {
@@ -181,17 +164,18 @@ body {
     left: 0;
     right: 0;
     flex-direction: column;
-    width: 100%;
     background: linear-gradient(
       135deg,
       rgba(116, 185, 255, 0.95),
       rgba(253, 121, 168, 0.95)
     );
     backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
     border-radius: 0 0 12px 12px;
     text-align: center;
-    z-index: 998;
+    z-index: 999;
+    /* Add max-height to ensure it doesn't extend infinitely if content is very long */
+    max-height: 80vh;
+    overflow-y: auto;
   }
 
   .nav-links.show {
@@ -199,7 +183,6 @@ body {
   }
 
   .nav-links li {
-    width: 100%;
     border-bottom: 1px solid rgba(255, 255, 255, 0.2);
   }
 
@@ -209,17 +192,22 @@ body {
 
   .nav-links li a {
     display: block;
-    width: 100%;
     padding: 12px 16px;
     color: #000;
   }
 
-  /* Mobile Dropdown */
+  .nav-links li ul.dropdown-menu {
+    /* Set position to static for mobile dropdown to stack naturally */
+    position: static;
+    background: rgba(0, 0, 0, 0.1);
+    box-shadow: none;
+    padding: 0;
+    min-width: auto;
+  }
+
+  /* Initially hide the dropdown on mobile */
   .nav-links li ul.dropdown-menu {
     display: none;
-    position: static;
-    background: rgba(255, 255, 255, 0.1);
-    box-shadow: none;
   }
 
   .nav-links li ul.dropdown-menu.show {
@@ -228,32 +216,32 @@ body {
   }
 
   .nav-links li ul.dropdown-menu a {
-    color: #333;
-    padding-left: 30px;
-  }
-
-  .login-btn {
-    display: none;
+    color: #000;
+    padding-left: 40px;
+    background: none;
   }
 }
 
-/* -------------------------------------- */
-/* 6. Desktop Restoration (Min-width: 769px) */
-/* -------------------------------------- */
+/* Desktop Restoration - Crucial for when resizing the browser */
 @media (min-width: 769px) {
   .nav-links {
+    /* Use !important to override the mobile 'display: none' that might be left by JS */
     display: flex !important;
-    position: static;
-    flex-direction: row;
-    padding: 0;
-    background: none;
-    backdrop-filter: none;
-    box-shadow: none;
+    position: static !important;
+    flex-direction: row !important;
+
+    /* Ensure dropdowns are correctly positioned for desktop */
+    max-height: none !important;
+    overflow-y: visible !important;
   }
   .hamburger {
     display: none !important;
   }
   .login-btn {
-    display: block;
+    display: block !important;
+  }
+  /* Hide the mobile 'show' state for dropdowns on desktop */
+  .nav-links li ul.dropdown-menu.show {
+    display: none;
   }
 }
